@@ -1,0 +1,28 @@
+services:
+  ml_workspace:
+    build:
+      context: .
+      dockerfile: ./docker/machine_learning.Dockerfile
+    image: ml_workspace
+    container_name: ml_workspace
+    ports:
+      - "8888:8888"  # For Jupyter Notebook
+    volumes:
+      - home_volume:/home/ashwin
+    working_dir: /home/ashwin
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+
+volumes:
+  home_volume:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/ashwin
+
