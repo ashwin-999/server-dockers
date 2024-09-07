@@ -18,6 +18,7 @@ RUN update-alternatives --install /usr/bin/python3 python3 /usr/bin/python${PYTH
 
 # Install PyTorch and other Python packages
 RUN pip3 install --no-cache-dir torch torchvision torchaudio
+RUN pip3 install --no-cache-dir pytest
 
 # Install fish shell
 RUN apt-get update && apt-get install -y fish && rm -rf /var/lib/apt/lists/*
