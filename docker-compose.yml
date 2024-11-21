@@ -8,8 +8,9 @@ services:
     ports:
       - "8888:8888"  # For Jupyter Notebook
     volumes:
-      - home_volume:/home/ashwin
-    working_dir: /home/ashwin
+      - host_home:/home/ashwin
+      - dataset_dir:/datasets
+    working_dir: /home/ashwin/workdir
     deploy:
       resources:
         reservations:
@@ -19,10 +20,16 @@ services:
               capabilities: [gpu]
 
 volumes:
-  home_volume:
+  host_home:
     driver: local
     driver_opts:
       type: none
       o: bind
       device: /home/ashwin
+  dataset_dir:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/ashwin/workdir/datasets
 
